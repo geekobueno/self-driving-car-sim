@@ -1,3 +1,6 @@
+import * as utils from './utils/utilsLoader';
+console.log(utils)
+
 const carCanvas = document.getElementById("carCanvas")
 carCanvas.width = 300
 const networkCanvas = document.getElementById("networkCanvas")
@@ -6,33 +9,33 @@ networkCanvas.width = 500
 const carCtx = carCanvas.getContext("2d")
 const networkCtx = networkCanvas.getContext("2d")
 
-const road = new Road(carCanvas.width/2,carCanvas.width*0.9)
+const road = new utils.Road(carCanvas.width/2,carCanvas.width*0.9)
 
 let outputs=[]
-const cars = generateCars(200)
+const cars = generateCars(100)
 let bestCar=cars[0]
 
 const sensors=[]
 for (let i = 0; i < cars.length; i++) {
-     sensors[i]= new Sensor(cars[i])
+     sensors[i]= new utils.Sensor(cars[i])
 }
 const brains=[]
 for (let i = 0; i < cars.length; i++) {
-    brains.push(new NeuralNetwork(
+    brains.push(new utils.NeuralNetwork(
         [sensors[i].rayCount,6,4]
     ))
 }
 let bestCarBrain=brains[cars.indexOf(bestCar)]
 
 const traffic=[
-    new Car(road.getLaneCenter(1),300,30,50,"DUMMY",3),
-    new Car(road.getLaneCenter(0),-100,30,50,"DUMMY",3),
-    new Car(road.getLaneCenter(2),-100,30,50,"DUMMY",3),
-    new Car(road.getLaneCenter(3),-300,30,50,"DUMMY",3),
-    new Car(road.getLaneCenter(1),-900,30,50,"DUMMY",3),
-    new Car(road.getLaneCenter(0),-500,30,50,"DUMMY",3),
-    new Car(road.getLaneCenter(2),-800,30,50,"DUMMY",3),
-    new Car(road.getLaneCenter(3),-1000,30,50,"DUMMY",3)
+    new utils.Car(road.getLaneCenter(1),300,30,50,"DUMMY",3),
+    new utils.Car(road.getLaneCenter(0),-100,30,50,"DUMMY",3),
+    new utils.Car(road.getLaneCenter(2),-100,30,50,"DUMMY",3),
+    new utils.Car(road.getLaneCenter(3),-300,30,50,"DUMMY",3),
+    new utils.Car(road.getLaneCenter(1),-900,30,50,"DUMMY",3),
+    new utils.Car(road.getLaneCenter(0),-500,30,50,"DUMMY",3),
+    new utils.Car(road.getLaneCenter(2),-800,30,50,"DUMMY",3),
+    new utils.Car(road.getLaneCenter(3),-1000,30,50,"DUMMY",3)
 ]
 
 if (localStorage.getItem("bestBrain")) {
@@ -61,7 +64,7 @@ function discard() {
 function generateCars(N) {
     const cars=[]
     for (let i = 0; i < N; i++) {
-        cars.push(new Car(road.getLaneCenter(1),800,30,50,"AI"))        
+        cars.push(new utils.Car(road.getLaneCenter(1),800,30,50,"AI",5))        
     }
     return cars
 }
@@ -111,15 +114,15 @@ function animateCar(time){
     let lastTrafficPosition=traffic[traffic.length-1].y
     if (bestCar.y<lastTrafficPosition) {
         traffic.push(
-            new Car(bestCar.x,
+            new utils.Car(bestCar.x,
             -Math.random()*1000+bestCar.y-200,30,50,"DUMMY",3),
-            new Car(road.getLaneCenter(Math.floor(Math.random()*3)),
+            new utils.Car(road.getLaneCenter(Math.floor(Math.random()*3)),
             -Math.random()*1000+lastTrafficPosition-200,30,50,"DUMMY",3),
-            new Car(road.getLaneCenter(Math.floor(Math.random()*3)),
+            new utils.Car(road.getLaneCenter(Math.floor(Math.random()*3)),
             -Math.random()*1000+lastTrafficPosition-200,30,50,"DUMMY",3),
-            new Car(road.getLaneCenter(Math.floor(Math.random()*3)),
+            new utils.Car(road.getLaneCenter(Math.floor(Math.random()*3)),
             -Math.random()*1000+lastTrafficPosition-200,30,50,"DUMMY",3),
-            new Car(road.getLaneCenter(Math.floor(Math.random()*3)),
+            new utils.Car(road.getLaneCenter(Math.floor(Math.random()*3)),
             -Math.random()*1000+lastTrafficPosition-200,30,50,"DUMMY",3)
         )
     }
@@ -130,6 +133,6 @@ function animateCar(time){
         save()
     }
     networkCtx.lineDashOffset=-time/50
-    Visualizer.drawNetwork(networkCtx,bestCarBrain)
+    utils.Visualizer.drawNetwork(networkCtx,bestCarBrain)
     requestAnimationFrame(animateCar)
 }

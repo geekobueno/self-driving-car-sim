@@ -4,7 +4,8 @@
   "description": "A self driving car simulation made with tensorflow js",
   "main": "main.js",
   "scripts": {
-    "test": "npm run dev"
+    "start": "parcel src/index.html --port 2493",
+    "test": ""
   },
   "repository": {
     "type": "git",
@@ -16,11 +17,11 @@
     "url": "https://github.com/Shabinder/SpotiFlyer/issues"
   },
   "homepage": "https://github.com/Shabinder/SpotiFlyer#readme",
-  "devDependencies": {
-    "parcel": "^2.12.0"
-  },
   "dependencies": {
     "@tensorflow/tfjs": "^4.20.0",
     "@tensorflow/tfjs-node": "^4.20.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
   }
 }

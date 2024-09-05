@@ -1,4 +1,6 @@
-class Visualizer {
+import * as func from "./func";
+
+export default class Visualizer {
     static drawNetwork(ctx,network){
         const margin = 50
         const left=margin
@@ -8,7 +10,7 @@ class Visualizer {
 
        const levelHeight=height/network.levels.length
         for (let i = network.levels.length-1; i >=0 ; i--) {
-            const levelTop=top+lerp(
+            const levelTop=top+func.lerp(
                 height-levelHeight,
                 0,
                 network.levels.length==1?0.5:i/(network.levels.length-1)
@@ -55,7 +57,7 @@ class Visualizer {
             
             ctx.beginPath()
             ctx.arc(x,bottom,nodeRadius*0.6,0,Math.PI*2)
-            ctx.fillStyle=getRGBA(inputs[i])
+            ctx.fillStyle=func.getRGBA(inputs[i])
             ctx.fill() 
         }
         for (let i = 0; i < outputs.length; i++) {
@@ -67,13 +69,13 @@ class Visualizer {
 
             ctx.beginPath()
             ctx.arc(x,top,nodeRadius*0.6,0,Math.PI*2)
-            ctx.fillStyle=getRGBA(outputs[i])
+            ctx.fillStyle=func.getRGBA(outputs[i])
             ctx.fill()  
             
             ctx.beginPath()
             ctx.lineWidth=2
             ctx.arc(x,top,nodeRadius*0.8,0,Math.PI*2)
-            ctx.strokeStyle=getRGBA(biases[i])
+            ctx.strokeStyle=func.getRGBA(biases[i])
             ctx.setLineDash([3,3])
             ctx.stroke()
             ctx.setLineDash([])
@@ -93,7 +95,7 @@ class Visualizer {
     }
 
     static #getNodeX(nodes,index,left,right){
-        return lerp(
+        return func.lerp(
             left,
             right,
             nodes.length==1?0.5:index/(nodes.length-1)

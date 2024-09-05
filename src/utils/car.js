@@ -1,5 +1,8 @@
-class Car {
-    constructor(x,y,width,height,controlType,maxSpeed=5) {
+import { Controls } from "./control";
+import * as func from "./func";
+
+export default class Car {
+    constructor(x,y,width,height,controlType,maxSpeed) {
         this.x = x
         this.y = y
         this.width = width
@@ -56,12 +59,12 @@ class Car {
 
     #assessDamage(borders,traffic){
         for (let i = 0; i < borders.length; i++) {
-            if (polyIntersect(this.polygon,borders[i])) {
+            if (func.polyIntersect(this.polygon,borders[i])) {
                 return true
             }            
         }
         for (let i = 0; i < traffic.length; i++) {
-            if (polyIntersect(this.polygon,traffic[i].polygon)) {
+            if (func.polyIntersect(this.polygon,traffic[i].polygon)) {
                 return true
             }            
         }
