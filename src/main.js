@@ -57,6 +57,7 @@ function save() {
     localStorage.setItem("bestBrain",
         JSON.stringify(bestCarBrain)
     )
+    console.log(localStorage)
 }
 
 function discard() {
@@ -80,12 +81,15 @@ function animateCar(time){
         traffic[i].update(road.borders,[])        
     }
 
-    for (let i = 0; i < cars.length; i++) {
-        sensors[i].update(road.borders,traffic)
-    }
+    let allCarsDamaged=true
 
     for (let i = 0; i < cars.length; i++) {
+        sensors[i].update(road.borders,traffic)
         cars[i].update(road.borders,traffic,outputs[i])
+
+        if (!cars[i].damage) {
+            allCarsDamaged = false;
+        }
     }
 
     bestCar=cars.find(
@@ -136,5 +140,11 @@ function animateCar(time){
     }
     networkCtx.lineDashOffset=-time/50
     utils.Visualizer.drawNetwork(networkCtx,bestCarBrain)
+
+    if (allCarsDamaged) {
+        console.log("All cars damaged. Reloading page...");
+        window.location.reload(); 
+        return; 
+    }
     requestAnimationFrame(animateCar)
 }
