@@ -1,4 +1,6 @@
-class Road {
+import * as func from "./func";
+
+export default class Road {
     constructor(x,width,laneCount=4) {
         this.x=x 
         this.width=width 
@@ -32,7 +34,7 @@ class Road {
         ctx.strokeStyle="white"
 
         for (let i = 1; i <= this.laneCount-1; i++) {
-            const x=lerp(
+            const x=func.lerp(
                 this.left,
                 this.right,
                 i/this.laneCount

@@ -1,4 +1,6 @@
-class Sensor {
+import * as func from "./func";
+
+export default class Sensor {
     constructor(car) {
         this.car=car
         this.rayCount=5
@@ -26,7 +28,7 @@ class Sensor {
     #castRays(){
         this.rays=[]
         for (let i = 0; i < this.rayCount; i++) {
-            const rayAngle=lerp(
+            const rayAngle=func.lerp(
                 this.raySpread/2,
                 -this.raySpread/2,
                 i/(this.rayCount-1)
@@ -45,7 +47,7 @@ class Sensor {
         let touches=[]
 
         for (let i = 0; i < borders.length ; i++) {
-            const touch = getIntersection(
+            const touch = func.getIntersection(
                 ray[0],
                 ray[1],
                 borders[i][0],
@@ -58,7 +60,7 @@ class Sensor {
         for (let i = 0; i < traffic.length; i++) {
             const poly=traffic[i].polygon
             for (let j = 0; j < poly.length; j++) {
-                const value= getIntersection(
+                const value= func.getIntersection(
                     ray[0],
                     ray[1],
                     poly[j],

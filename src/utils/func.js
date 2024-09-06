@@ -1,8 +1,8 @@
-function lerp(A,B,t){
+export function lerp(A,B,t){
     return A+(B-A)*t
 }
 
-function getIntersection(A,B,C,D){
+export function getIntersection(A,B,C,D){
     const tTop=(D.x-C.x)*(A.y-C.y)-(D.y-C.y)*(A.x-C.x)
     const uTop=(C.y-A.y)*(A.x-B.x)-(C.x-A.x)*(A.y-B.y)
     const bottom=(D.y-C.y)*(B.x-A.x)-(D.x-C.x)*(B.y-A.y)
@@ -20,7 +20,7 @@ function getIntersection(A,B,C,D){
     }
 }
 
-function polyIntersect(poly1,poly2){
+export function polyIntersect(poly1,poly2){
     for (let i = 0; i < poly1.length; i++) {
         for (let j = 0; j < poly2.length; j++) {
             const touch = getIntersection(
@@ -36,7 +36,7 @@ function polyIntersect(poly1,poly2){
     }
 }
 
-function getRGBA(value) {
+export function getRGBA(value) {
     const alpha=Math.abs(value)
     const R=value<0?0:255
     const G=R

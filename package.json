@@ -1,0 +1,27 @@
+{
+  "name": "self-driving-car-sim",
+  "version": "1.0.0",
+  "description": "A self driving car simulation made with tensorflow js",
+  "main": "main.js",
+  "scripts": {
+    "start": "parcel src/index.html --port 2493",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shabinder/SpotiFlyer.git"
+  },
+  "author": "GeekoBueno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shabinder/SpotiFlyer/issues"
+  },
+  "homepage": "https://github.com/Shabinder/SpotiFlyer#readme",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.20.0",
+    "@tensorflow/tfjs-node": "^4.20.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
