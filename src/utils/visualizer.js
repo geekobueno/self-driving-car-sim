@@ -42,7 +42,7 @@ export default class Visualizer {
                     top
                 )  
                 ctx.lineWidth=2
-                ctx.strokeStyle=getRGBA(weights[i][j])
+                ctx.strokeStyle=func.getRGBA(weights[i][j])
                 ctx.stroke()        
             }            
         }

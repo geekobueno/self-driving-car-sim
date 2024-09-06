@@ -1,5 +1,7 @@
 import * as utils from './utils/utilsLoader';
-console.log(utils)
+
+window.save = save;
+window.discard = discard;
 
 const carCanvas = document.getElementById("carCanvas")
 carCanvas.width = 300
@@ -44,7 +46,7 @@ if (localStorage.getItem("bestBrain")) {
             localStorage.getItem("bestBrain")
         )
         if (i!=0) {
-            NeuralNetwork.mutate(brains[i],0.1)
+            utils.NeuralNetwork.mutate(brains[i],0.1)
         }
     }
 }
@@ -71,7 +73,7 @@ function generateCars(N) {
 
 function animateCar(time){
     for (let i = 0; i < cars.length; i++) {
-        outputs[i]=(NeuralNetwork.feedForward(sensors[i].offsets,brains[i]))        
+        outputs[i]=(utils.NeuralNetwork.feedForward(sensors[i].offsets,brains[i]))        
     }
 
     for (let i = 0; i < traffic.length; i++) {
